@@ -6,7 +6,7 @@ class AdsController{
     addAds = async (req, res) => {
         try {
             const ad = await this.adsService.addAds(req.body);
-            res.status(200).json(ads);
+            res.status(200).json(ad);
         }
         catch {
             throw new Error(400, "Не удалось создать объявление")
@@ -56,11 +56,5 @@ class AdsController{
         }
     }
 
-    
-
-
-
-
-
-
 }
+module.exports = AdsController;

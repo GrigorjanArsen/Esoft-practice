@@ -4,7 +4,7 @@ class AdsService {
     }
 
     async addAds(adsData) {
-        return this.adsModel.create(adsData);
+        return this.adsModel.addAds(adsData);
     }
 
     async getAll() {

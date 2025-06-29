@@ -1,6 +1,6 @@
-const pool = require('../db');
+const { pool } = require('../db');
 
-class Ads {
+class AdsDal {
     async addAds(adsData) {
         try {
             const query = pool('ads');
@@ -52,4 +52,4 @@ class Ads {
         
     }
 }
-module.exports = new CartModel();
+module.exports = new AdsDal();
