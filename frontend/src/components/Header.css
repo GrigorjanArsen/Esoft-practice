@@ -1,0 +1,105 @@
+.mainbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 11vh;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  color: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.progname {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #bb86fc;
+  /* text-shadow: 0 0 10px #bb86fc44; */
+  margin-left: 10px;
+  white-space: nowrap;
+  transition: color 0.05s ease, text-shadow 0.3s ease;
+}
+
+.progname:hover {
+  color: #d2afff;
+  text-shadow: 1px 1px 12px #bb86fc5e;
+  cursor: pointer;
+
+}
+
+.textbox {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 100px;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+  color: #e0e0e0;
+}
+
+.textbox a {
+  text-decoration: none;
+  color: #bb86fc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.textbox a:hover {
+  background-color: rgba(148, 100, 206, 0.39);
+  color: white;
+}
+
+/* Прогинфо (если используешь) */
+.proginfo {
+  font-size: 1rem;
+  color: #ccc;
+  margin-left: auto;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .mainbar {
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .progname {
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+  }
+
+  .textbox {
+    font-size: 0.95rem;
+    margin: 5px 0;
+  }
+
+  .proginfo {
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .progname {
+    font-size: 1.2rem;
+  }
+
+  .textbox {
+    font-size: 0.9rem;
+  }
+
+  .proginfo {
+    font-size: 0.8rem;
+  }
+}
