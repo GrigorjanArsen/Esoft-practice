@@ -15,11 +15,11 @@ class AdsService {
         return this.adsModel.getById(adsId);
     }
 
-    async updateById(adsId) {
-        return this.adsModel.updateById(adsId);
+    async updateById(adsId, adsData) {
+        return this.adsModel.updateById(adsId,adsData);
     }
 
-    async deleteAds(adsId) {
+    async deleteById(adsId) {
         return this.adsModel.deleteById(adsId);
     }
 }

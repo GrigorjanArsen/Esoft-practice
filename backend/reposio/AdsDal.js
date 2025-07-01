@@ -43,14 +43,17 @@ class AdsDal {
     }
 
     async deleteById(adsId) {
-        try {
-            const query = pool('ads');
-            await query.where('id', adsId).delete();
-        }catch (err) {
-            console.error('Error adding to cart', err);
-        }
-        
+  try {
+    const deletedCount = await pool('ads').where('id', adsId).del();
+    if (deletedCount === 0) {
+      throw new Error('Объявление не найдено');
     }
+    return true;
+  } catch (err) {
+    console.error('Ошибка удаления объявления:', err);
+    throw err;
+  }
+}
 }
 module.exports = new AdsDal();
 

@@ -33,8 +33,9 @@ const Ads = observer(() => {
               <p><strong>Статус:</strong> {ad.status}</p>
               <p>{ad.description}</p>
               <p className="ad-date">Дата публикации: {new Date(ad.published_at).toLocaleDateString()}</p>
-              <button className="delete-button" onClick={() => adsStore.deleteAd(ad.id)}>
+              <button className="delete-button" onClick={() => adsStore.deleteAd(ad.id)} disabled={adsStore.deletingId === ad.id}>
                 Удалить
+                {adsStore.deletingId === ad.id && <span className="spinner"></span>}
               </button>
               <Link to={`/edit/${ad.id}`} className="edit-button">Редактировать</Link>
             </li>

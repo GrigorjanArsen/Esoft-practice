@@ -29,14 +29,18 @@ function EditAdForm() {
   };
 
   const handleSubmit = async e => {
-    e.preventDefault();
-    if (!form.title || !form.type || !form.city || !form.price) {
-      alert('Пожалуйста, заполните все обязательные поля');
-      return;
-    }
+  e.preventDefault();
+  if (!form.title || !form.type || !form.city || !form.price) {
+    alert('Пожалуйста, заполните все обязательные поля');
+    return;
+  }
+  try {
     await adsStore.updateAd({ ...form, id: ad.id });
     navigate('/ads');
-  };
+  } catch (error) {
+    alert('Ошибка при обновлении объявления: ' + error.message);
+  }
+};
 
   if (!ad) return <p style={{ padding: 20, color: '#eee' }}>Объявление не найдено.</p>;
 

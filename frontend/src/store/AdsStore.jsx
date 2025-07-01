@@ -5,6 +5,7 @@ class AdsStore {
   ads = [];
   loading = false;
   error = null;
+  deletingId = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -54,6 +55,7 @@ class AdsStore {
         if (index > -1) this.ads[index] = updatedAd;
         this.loading = false;
       });
+      return updatedAd;
     } catch (e) {
       runInAction(() => {
         this.error = e.message;
@@ -63,18 +65,18 @@ class AdsStore {
   };
 
   deleteAd = async (id) => {
-    this.loading = true;
+    this.deletingId = id;
     this.error = null;
     try {
       await adsApi.deleteAds(id);
       runInAction(() => {
         this.ads = this.ads.filter(ad => ad.id !== id);
-        this.loading = false;
+        this.deletingId = null;
       });
     } catch (e) {
       runInAction(() => {
         this.error = e.message;
-        this.loading = false;
+        this.deletingId = null;
       });
     }
   };
