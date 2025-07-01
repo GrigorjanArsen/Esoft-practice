@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 
 function Ads({ ads }) {
   return (
+    
     <div className="ads-container" style={{ backgroundColor: '#121212', color: '#eee' }}>
+      <Link to="/add" className="floating-add-button" title="Добавить объявление">
+      <span className='plus-sign'>+</span>
+      </Link>
       <h2>Мои объявления</h2>
       {ads.length === 0 ? (
         <p>Объявлений пока нет. <Link to="/add">Добавить первое</Link></p>
@@ -17,6 +21,8 @@ function Ads({ ads }) {
               <p><strong>Статус:</strong> {ad.status}</p>
               <p>{ad.description}</p>
               <p className="ad-date">Дата публикации: {new Date(ad.published_at).toLocaleDateString()}</p>
+
+              <Link to={`/edit/${ad.id}`} className="edit-button">Редактировать</Link>
             </li>
           ))}
         </ul>

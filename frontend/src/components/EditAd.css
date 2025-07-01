@@ -1,0 +1,65 @@
+.addad-container {
+  padding: 40px 20px;
+  background-color: #121212;
+  color: #eee;
+  min-height: 80vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.addad-container h2 {
+  color: #bb86fc;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.addad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.addad-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.addad-form input,
+.addad-form textarea,
+.addad-form select {
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: #1f1f1f;
+  color: #eee;
+  resize: vertical;
+}
+
+.addad-form textarea {
+  min-height: 80px;
+}
+
+.btn-submit {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(45deg, #7b4dff, #bb86fc);
+  color: #121212;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(187, 134, 252, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(45deg, #bb86fc, #7b4dff);
+  color: white;
+}
