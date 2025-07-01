@@ -13,7 +13,7 @@ class AdsController{
         }
     }
 
-    getAll = async (res) => {
+    getAll = async (req, res) => {
         try {
             const ads = await this.adsService.getAll();
             res.status(200).json(ads);

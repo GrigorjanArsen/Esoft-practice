@@ -1,11 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import './AddAd.css'; // используем ту же стилизацию, что и AddAd
+import './AddAd.css';
+import { adsStore } from '../store/AdsStore';
 
-function EditAdForm({ ads, onUpdateAd }) {
+function EditAdForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const ad = ads.find(ad => ad.id === parseInt(id));
+
+  const ad = adsStore.ads.find(ad => ad.id === Number(id));
 
   const [form, setForm] = useState({
     title: '',
@@ -23,17 +25,16 @@ function EditAdForm({ ads, onUpdateAd }) {
   }, [ad]);
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!form.title || !form.type || !form.city || !form.price) {
       alert('Пожалуйста, заполните все обязательные поля');
       return;
     }
-    onUpdateAd({ ...form, id: ad.id });
+    await adsStore.updateAd({ ...form, id: ad.id });
     navigate('/ads');
   };
 

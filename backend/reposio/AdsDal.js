@@ -13,8 +13,8 @@ class AdsDal {
 
     async getAll() {
         try {
+            console.log('DAL: получаем объявления');
             const query = pool('ads');
-            
             return query.select('*')
         } catch (err) {
             console.error('Error adding to cart', err);
@@ -53,3 +53,4 @@ class AdsDal {
     }
 }
 module.exports = new AdsDal();
+

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './AddAd.css';
+import { adsStore } from '../store/AdsStore';
+import { useNavigate } from 'react-router-dom';
 
-function AddAd({ onAdd }) {
+function AddAd() {
   const [form, setForm] = useState({
     title: '',
     type: '',
@@ -11,25 +13,20 @@ function AddAd({ onAdd }) {
     status: 'Активно',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = e => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!form.title || !form.type || !form.city || !form.price) {
       alert('Пожалуйста, заполните все обязательные поля');
       return;
     }
-    onAdd({ ...form, id: Date.now(), published_at: new Date().toISOString() });
-    setForm({
-      title: '',
-      type: '',
-      city: '',
-      price: '',
-      description: '',
-      status: 'Активно',
-    });
+    await adsStore.addAd({ ...form, published_at: new Date().toISOString() });
+    navigate('/ads');
   };
 
   return (
