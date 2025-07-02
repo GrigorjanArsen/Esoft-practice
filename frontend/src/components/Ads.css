@@ -127,3 +127,23 @@
   background-color: #9f6dff;
   color: white;
 }
+
+.filters-select {
+  padding: 0.5rem 1rem;
+  background-color: #1e1e1e;
+  color: #eee;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s ease, background-color 0.2s ease;
+}
+
+.filters-select:hover {
+  border-color: #555;
+  background-color: #2a2a2a;
+}
+
+.filters-select:focus {
+  border-color: #888;
+}

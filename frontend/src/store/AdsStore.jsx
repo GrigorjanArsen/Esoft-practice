@@ -6,9 +6,27 @@ class AdsStore {
   loading = false;
   error = null;
   deletingId = null;
+  selectedCity = '';
+  selectedType = '';
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+   setCityFilter = (city) => {
+    this.selectedCity = city;
+  };
+
+  setTypeFilter = (type) => {
+    this.selectedType = type;
+  };
+
+  get filteredAds() {
+    return this.ads.filter(ad => {
+      const cityMatch = this.selectedCity ? ad.city === this.selectedCity : true;
+      const typeMatch = this.selectedType ? ad.type === this.selectedType : true;
+      return cityMatch && typeMatch;
+    });
   }
 
   fetchAds = async () => {

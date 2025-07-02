@@ -5,11 +5,14 @@ import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 
 const Ads = observer(() => {
-  const { ads, loading, error, fetchAds } = adsStore;
+  const { loading, error, fetchAds, filteredAds, selectedCity, selectedType, setCityFilter, setTypeFilter } = adsStore;
 
   useEffect(() => {
     fetchAds();
-  }, []); // пустой массив, чтобы вызвать только один раз
+  }, []);
+
+  const uniqueCities = [...new Set(adsStore.ads.map(ad => ad.city))];
+  const uniqueTypes = [...new Set(adsStore.ads.map(ad => ad.type))];
 
   if (loading) return <p style={{ color: '#eee' }}>Загрузка...</p>;
   if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
@@ -21,11 +24,29 @@ const Ads = observer(() => {
       </Link>
 
       <h2>Мои объявления</h2>
-      {ads.length === 0 ? (
-        <p>Объявлений пока нет. <Link to="/add">Добавить первое</Link></p>
+
+      {/* Фильтры */}
+      <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
+        <select className = "filters-select" value={selectedCity} onChange={(e) => setCityFilter(e.target.value)}>
+          <option value="">Все города</option>
+          {uniqueCities.map(city => (
+            <option key={city} value={city}>{city}</option>
+          ))}
+        </select>
+
+        <select className = "filters-select" value={selectedType} onChange={(e) => setTypeFilter(e.target.value)}>
+          <option value="">Все типы</option>
+          {uniqueTypes.map(type => (
+            <option key={type} value={type}>{type}</option>
+          ))}
+        </select>
+      </div>
+
+      {filteredAds.length === 0 ? (
+        <p>Нет объявлений по текущим фильтрам.</p>
       ) : (
         <ul className="ads-list">
-          {ads.map(ad => (
+          {filteredAds.map(ad => (
             <li key={ad.id} className="ad-card">
               <h3>{ad.title}</h3>
               <p><strong>Тип:</strong> {ad.type} | <strong>Город:</strong> {ad.city}</p>
@@ -33,9 +54,12 @@ const Ads = observer(() => {
               <p><strong>Статус:</strong> {ad.status}</p>
               <p>{ad.description}</p>
               <p className="ad-date">Дата публикации: {new Date(ad.published_at).toLocaleDateString()}</p>
-              <button className="delete-button" onClick={() => adsStore.deleteAd(ad.id)} disabled={adsStore.deletingId === ad.id}>
-                Удалить
-                {adsStore.deletingId === ad.id && <span className="spinner"></span>}
+              <button
+                className="delete-button"
+                onClick={() => adsStore.deleteAd(ad.id)}
+                disabled={adsStore.deletingId === ad.id}
+              >
+                {adsStore.deletingId === ad.id ? 'Удаление...' : 'Удалить'}
               </button>
               <Link to={`/edit/${ad.id}`} className="edit-button">Редактировать</Link>
             </li>
