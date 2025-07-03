@@ -22,12 +22,6 @@ class AdsStore {
   setTypeFilter = (type) => {
     this.selectedType = type;
   };
-  
-
-
-setModalOpen = (val) => {
-  this.modalOpen = val;
-};
 
 setAdToDelete = (ad) => {
   this.adToDelete = ad;

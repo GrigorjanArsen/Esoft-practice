@@ -2,8 +2,7 @@ import './Ads.css';
 import { Link } from 'react-router-dom';
 import { adsStore } from '../store/AdsStore';
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
-import ConfirmModal from './ConfirmModal';
+import { useEffect } from 'react';
 
 const Ads = observer(() => {
   const {
@@ -19,9 +18,6 @@ const Ads = observer(() => {
     deleteAd,
   } = adsStore;
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [adToDelete, setAdToDelete] = useState(null);
-
   useEffect(() => {
     fetchAds();
   }, []);
@@ -29,30 +25,15 @@ const Ads = observer(() => {
   const uniqueCities = [...new Set(adsStore.ads.map(ad => ad.city))];
   const uniqueTypes = [...new Set(adsStore.ads.map(ad => ad.type))];
 
-  const openDeleteModal = (ad) => {
-    setAdToDelete(ad);
-    setModalOpen(true);
-  };
-
-  const confirmDelete = async () => {
-  console.log('confirmDelete вызван'); // <-- этот лог должен быть в консоли при нажатии "Да"
-  if (adToDelete) {
+  const handleDelete = async (ad) => {
+    const confirmed = window.confirm('Вы точно хотите удалить это объявление?');
+    if (!confirmed) return;
     try {
-      await deleteAd(adToDelete.id);
-      console.log('Удаление завершено');
+      await deleteAd(ad.id);
+      // alert('Объявление удалено');
     } catch (err) {
-      console.error('Ошибка удаления:', err);
+      alert('Ошибка удаления: ' + err.message);
     }
-    setModalOpen(false);
-    console.log('modalOpen после закрытия:', modalOpen);
-    setAdToDelete(null);
-  }
-  };
-
-
-  const cancelDelete = () => {
-    setModalOpen(false);
-    setAdToDelete(null);
   };
 
   if (loading) return <p style={{ color: '#eee' }}>Загрузка...</p>;
@@ -97,7 +78,7 @@ const Ads = observer(() => {
               <p className="ad-date">Дата публикации: {new Date(ad.published_at).toLocaleDateString()}</p>
               <button
                 className="delete-button"
-                onClick={() => openDeleteModal(ad)}
+                onClick={() => handleDelete(ad)}
                 disabled={deletingId === ad.id}
               >
                 {deletingId === ad.id ? 'Удаление...' : 'Удалить'}
@@ -107,14 +88,6 @@ const Ads = observer(() => {
           ))}
         </ul>
       )}
-
-      <ConfirmModal
-        key= {modalOpen ? 'open' : 'closed'}
-        isOpen={modalOpen}
-        onConfirm={confirmDelete}
-        onCancel={cancelDelete}
-        message="Вы точно хотите удалить это объявление?"
-      />
     </div>
   );
 });

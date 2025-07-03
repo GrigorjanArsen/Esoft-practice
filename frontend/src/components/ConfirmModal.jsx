@@ -23,22 +23,10 @@ const ConfirmModal = ({ isOpen, onConfirm, onCancel, message }) => {
       <div className="modal-content">
         <p>{message}</p>
         <div className="modal-buttons">
-          <button
-            className="modal-btn confirm"
-            onClick={() => {
-              console.log('Нажали Да');  // <-- Проверка клика
-              onConfirm();
-            }}
-          >
+          <button className="modal-btn confirm" onClick={onConfirm}>
             Да
           </button>
-          <button
-            className="modal-btn cancel"
-            onClick={() => {
-              console.log('Нажали Нет');  // <-- Проверка клика
-              onConfirm();
-            }}
-          >
+          <button className="modal-btn cancel" onClick={onCancel}>
             Нет
           </button>
         </div>
