@@ -1,12 +1,144 @@
-# React + Vite
+# 🏠 Мини-CRM для управления объявлениями о недвижимости
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение для добавления, редактирования и удаления объявлений о недвижимости с использованием стека React + MobX + Node.js + PostgreSQL.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📆 Стек технологий
 
-## Expanding the ESLint configuration
+* **Frontend:**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  * React
+  * MobX
+  * Vite
+  * mobx-react-lite
+  * ReactDOM
+
+* **Backend:**
+
+  * Node.js
+  * Express
+  * PostgreSQL
+  * Knex.js
+
+---
+
+## 📁 Структура проекта
+
+```
+project-root/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── store/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── README.md
+├── backend/
+│   ├── Controllers/
+│   ├── Routes/
+│   ├── Service/
+│   ├── migrations/
+│   ├── reposio/
+│   ├── src/
+│   ├── db.js
+│   ├── knexfile.js
+│   ├── .env
+│   └── package.json
+```
+
+---
+
+## ⚙️ Установка и запуск проекта
+
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/GrigorjanArsen/Esoft-practice.git
+cd ./Esoft-practice
+```
+
+### 2. Установка зависимостей
+
+#### Frontend
+    
+```bash
+cd frontend
+npm install
+```
+
+#### Backend
+
+```bash
+cd ../backend
+npm install
+```
+
+---
+
+### 3. Настройка базы данных
+
+* Установи PostgreSQL и создай базу данных (можно через pgAdmin).
+* Заполни `.env` файл в `backend/`:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=твой_пользователь
+DB_PASSWORD=твой_пароль
+DB_NAME=имя_бд
+```
+
+* Применение миграций:
+
+```bash
+npx knex migrate:latest --knexfile knexfile.js
+```
+
+---
+
+### 4. Запуск проекта
+
+#### Запуск backend:
+
+```bash
+cd backend
+npm run dev
+```
+
+#### Запуск frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+---
+
+## 🚀 Возможности
+
+* 📄 Добавление, редактирование и удаление объявлений.
+* 🔍 Фильтрация по городу и типу.
+* ✅ Подтверждение при удалении.
+* 🧐 Состояние управляется через MobX.
+* ⚙️ Backend API на Express.
+* 🗄️ Хранение данных в PostgreSQL.
+
+---
+
+## 📬 Автор
+
+* GitHub: [GrigorjanArsen](https://github.com/GrigorjanArsen)
+
+---
+
+## 📝 Лицензия
+
+Проект создан в образовательных целях. Использование по своему усмотрению.
